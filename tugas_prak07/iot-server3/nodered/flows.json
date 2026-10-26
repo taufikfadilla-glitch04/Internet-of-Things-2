@@ -1,0 +1,262 @@
+[
+    {
+        "id": "e3cfed5d2479eef8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a65f9af3867ee77d",
+        "type": "mqtt-broker",
+        "name": "Docker Test Desk",
+        "broker": "",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "1e7bed56378dcd49",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mqtt",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "abb685c9a6549ef1",
+        "type": "mqtt-broker",
+        "name": "Mosquitto Local",
+        "broker": "mqtt",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "df5f8bb8d30cbae3",
+        "type": "mqtt in",
+        "z": "e3cfed5d2479eef8",
+        "name": "",
+        "topic": "kampus/labiot/telemetri",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "abb685c9a6549ef1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "279e142fffb848e3",
+                "1eb2681a9e78fae2"
+            ]
+        ]
+    },
+    {
+        "id": "279e142fffb848e3",
+        "type": "debug",
+        "z": "e3cfed5d2479eef8",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "6b476f0836bcceba",
+        "type": "switch",
+        "z": "e3cfed5d2479eef8",
+        "name": "",
+        "property": "payload.suhu",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "31",
+                "vt": "str"
+            },
+            {
+                "t": "lte",
+                "v": "31",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 150,
+        "y": 720,
+        "wires": [
+            [
+                "75fe3421facc803c"
+            ],
+            [
+                "d03bc459188613dc"
+            ]
+        ]
+    },
+    {
+        "id": "75fe3421facc803c",
+        "type": "change",
+        "z": "e3cfed5d2479eef8",
+        "name": "Nyalakan LED Indikator",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{   \"led\": 1 }",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d03bc459188613dc",
+        "type": "change",
+        "z": "e3cfed5d2479eef8",
+        "name": "Padamkan LED Indikator",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{   \"led\": 0 }",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5ca72e3b60120a16",
+        "type": "mqtt out",
+        "z": "e3cfed5d2479eef8",
+        "name": "",
+        "topic": "kampus/labiot/kendali",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "abb685c9a6549ef1",
+        "x": 360,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "1eb2681a9e78fae2",
+        "type": "function",
+        "z": "e3cfed5d2479eef8",
+        "name": "function 1",
+        "func": "// ===== Filter Histeresis (Bang-Bang dengan Dead Band) =====\nconst BATAS_ATAS = 31.5;   // LED ON  jika suhu > 31.5\nconst BATAS_BAWAH = 30.0;   // LED OFF jika suhu < 30.0\nconst TOPIK_KENDALI = \"kampus/labiot/kendali\";\n\n// Validasi data masuk\nif (!msg.payload || msg.payload.suhu === undefined) {\n    node.warn(\"Payload tidak memiliki field 'suhu'\");\n    return null;\n}\nconst suhu = parseFloat(msg.payload.suhu);\nif (isNaN(suhu)) {\n    node.warn(\"Nilai suhu tidak valid\");\n    return null;\n}\n\n// Ambil state LED terakhir; jika belum ada, sinkronkan dengan status_led dari NodeMCU\nlet ledState = context.get(\"ledState\");\nif (ledState === undefined) {\n    ledState = (msg.payload.status_led === 1) ? 1 : 0;\n}\n\n// Logika histeresis\nif (suhu > BATAS_ATAS) {\n    ledState = 1;            // terlalu panas -> ON\n} else if (suhu < BATAS_BAWAH) {\n    ledState = 0;            // sudah cukup dingin -> OFF\n}\n// 30.0 <= suhu <= 31.5 : zona mati, state TIDAK berubah\n\ncontext.set(\"ledState\", ledState);\n\n// Indikator status di bawah node\nnode.status({\n    fill: ledState ? \"red\" : \"green\",\n    shape: \"dot\",\n    text: \"suhu \" + suhu + \" C | LED \" + (ledState ? \"ON\" : \"OFF\")\n});\n\n// Kirim perintah ke topik kendali\nreturn {\n    topic: TOPIK_KENDALI,\n    payload: { led: ledState }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "5ca72e3b60120a16"
+            ]
+        ]
+    }
+]
